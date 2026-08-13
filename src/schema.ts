@@ -93,5 +93,16 @@ export const ItinerarySchema = z.object({
 
 export type Itinerary = z.infer<typeof ItinerarySchema>;
 
-/** 供 Agent SDK outputFormat 使用的 JSON Schema */
-export const itineraryJsonSchema = z.toJSONSchema(ItinerarySchema);
+/**
+ * 供 Agent SDK outputFormat 使用的 JSON Schema。
+ * 注意：CLI 端用 ajv(draft-07) 校验，zod 默认输出 draft-2020-12 会被拒，
+ * 因此指定 target 并移除 $schema 头。
+ */
+export const itineraryJsonSchema = (() => {
+  const schema = z.toJSONSchema(ItinerarySchema, { target: "draft-7" }) as Record<
+    string,
+    unknown
+  >;
+  delete schema.$schema;
+  return schema;
+})();

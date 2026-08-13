@@ -5,7 +5,9 @@ import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.js";
 import { ItinerarySchema, itineraryJsonSchema } from "./schema.js";
 import { renderMarkdown } from "./render.js";
 
-const rawQuery = process.argv.slice(2).join(" ").trim();
+const argv = process.argv.slice(2);
+while (argv[0] === "--") argv.shift(); // pnpm 会把分隔符 "--" 原样传入
+const rawQuery = argv.join(" ").trim();
 if (!rawQuery) {
   console.error('用法：pnpm dev -- "十一去成都4天，两人预算6000，爱吃辣…"');
   process.exit(1);
