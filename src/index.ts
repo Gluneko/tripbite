@@ -1,6 +1,7 @@
 import { query } from "@anthropic-ai/claude-agent-sdk";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { config } from "./config.js";
+import { travelServer } from "./mcp/travel.js";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.js";
 import { ItinerarySchema, itineraryJsonSchema } from "./schema.js";
 import { renderMarkdown } from "./render.js";
@@ -29,6 +30,7 @@ const run = query({
         url: config.amapMcpUrl,
         alwaysLoad: true, // W1 工具少，全量进 prompt，避免 tool-search 间接层
       },
+      travel: travelServer, // 进程内 SDK MCP：交通/酒店报价（W1 mock，W2 换真实源）
     },
     // W1 单 Agent：只需要高德 MCP 工具，禁掉文件/命令类内置工具，保持轨迹干净
     disallowedTools: [
