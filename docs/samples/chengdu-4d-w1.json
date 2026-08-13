@@ -1,0 +1,454 @@
+{
+  "destination": "成都",
+  "days": 4,
+  "travelers": 2,
+  "budgetTotal": 6000,
+  "tastePreferences": [
+    "爱吃辣但同伴不能吃太辣",
+    "需要鸳鸯锅或微辣选择",
+    "火锅体验必不可少",
+    "苍蝇馆子体验（地道小馆）",
+    "川菜为主",
+    "适当品尝成都特色小吃"
+  ],
+  "hardConstraints": [
+    "必须安排一顿火锅",
+    "必须安排一顿苍蝇馆子",
+    "住宿位置在春熙路附近",
+    "同伴不能吃太辣，需提供微辣/鸳鸯锅选择"
+  ],
+  "transportCandidates": [
+    {
+      "mode": "高铁",
+      "description": "G1378次高铁二等座，07:07出发14:07到达，往返1868元/2人，车程约7小时，性价比最高",
+      "costEstimate": 1868,
+      "source": "mock:rail-estimate"
+    },
+    {
+      "mode": "飞机",
+      "description": "MU7419次经济舱，10:30出发14:06到达，往返3012元/2人，飞行3.6小时，快但超预算",
+      "costEstimate": 3012,
+      "source": "mock:flight-estimate"
+    }
+  ],
+  "hotelCandidates": [
+    {
+      "name": "雅斯特酒店(成都春熙路太古里店)",
+      "address": "红星路三段8号",
+      "poiId": "B0G17SVZV4",
+      "pricePerNight": 483,
+      "reason": "春熙路太古里核心区，步行5分钟到地铁，性价比高，3晚1449元，两人适合",
+      "source": "mock:hotel-estimate"
+    },
+    {
+      "name": "秋果酒店(成都春熙路太古里店)",
+      "address": "大慈寺路77号",
+      "poiId": "B0FFK6OLMB",
+      "pricePerNight": 491,
+      "reason": "春熙路核心区，装修较新，1473元/3晚",
+      "source": "mock:hotel-estimate"
+    },
+    {
+      "name": "如家酒店(成都春熙路地铁站店)",
+      "address": "总府路3号",
+      "poiId": "B0FFFA0I84",
+      "pricePerNight": 568,
+      "reason": "老牌连锁，含双早，1704元/3晚",
+      "source": "mock:hotel-estimate"
+    }
+  ],
+  "dailyPlans": [
+    {
+      "day": 1,
+      "summary": "熊猫基地探秘→太古里美食初体验",
+      "items": [
+        {
+          "startTime": "07:30",
+          "endTime": "12:30",
+          "type": "sight",
+          "title": "大熊猫繁育研究基地",
+          "address": "熊猫大道1375号",
+          "poiId": "B001C7WE5S",
+          "transitMode": "",
+          "transitMinutes": 0,
+          "costEstimate": 110,
+          "notes": "早去早凉快，熊猫活跃。门票55元/人（估算）"
+        },
+        {
+          "startTime": "12:30",
+          "endTime": "13:30",
+          "type": "transit",
+          "title": "熊猫基地→太古里",
+          "address": "",
+          "poiId": "",
+          "transitMode": "地铁/公交",
+          "transitMinutes": 60,
+          "costEstimate": 10,
+          "notes": "地铁+公交组合"
+        },
+        {
+          "startTime": "13:30",
+          "endTime": "15:00",
+          "type": "meal",
+          "title": "午餐：烤匠麻辣烤鱼(IFS店)",
+          "address": "红星路三段1号IFS国际金融中心7楼",
+          "poiId": "B0FFILAVWY",
+          "transitMode": "",
+          "transitMinutes": 0,
+          "costEstimate": 280,
+          "notes": "可调整辣度（微辣/不辣），适合不能吃太辣的同伴"
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "17:30",
+          "type": "sight",
+          "title": "太古里购物漫步",
+          "address": "中纱帽街8号",
+          "poiId": "B0FFF6X49V",
+          "transitMode": "步行",
+          "transitMinutes": 0,
+          "costEstimate": 0,
+          "notes": "体验成都时尚商业街"
+        },
+        {
+          "startTime": "17:30",
+          "endTime": "19:00",
+          "type": "meal",
+          "title": "晚餐：蜀技双流老妈兔头",
+          "address": "红星路2段3号",
+          "poiId": "B0K0TR1PQE",
+          "transitMode": "步行",
+          "transitMinutes": 5,
+          "costEstimate": 200,
+          "notes": "特色川菜，可要求少辣"
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "type": "hotel",
+          "title": "入住雅斯特酒店",
+          "address": "红星路三段8号",
+          "poiId": "B0G17SVZV4",
+          "transitMode": "步行",
+          "transitMinutes": 3,
+          "costEstimate": 483,
+          "notes": "3晚总价1449元，分摊到每晚"
+        }
+      ],
+      "dayCostEstimate": 1083
+    },
+    {
+      "day": 2,
+      "summary": "宽窄巷子古韵→人民公园慢生活",
+      "items": [
+        {
+          "startTime": "09:00",
+          "endTime": "12:00",
+          "type": "sight",
+          "title": "宽窄巷子景区",
+          "address": "少城街道金河路口宽窄巷子",
+          "poiId": "B001C7YCM4",
+          "transitMode": "地铁",
+          "transitMinutes": 20,
+          "costEstimate": 0,
+          "notes": "成都历史文化街区，免费"
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:30",
+          "type": "meal",
+          "title": "午餐：成都味道",
+          "address": "中纱帽街8号成都太古里",
+          "poiId": "B0LD09G4I6",
+          "transitMode": "地铁+步行",
+          "transitMinutes": 25,
+          "costEstimate": 250,
+          "notes": "地道川菜，环境舒适"
+        },
+        {
+          "startTime": "13:30",
+          "endTime": "14:00",
+          "type": "transit",
+          "title": "太古里→人民公园",
+          "address": "",
+          "poiId": "",
+          "transitMode": "地铁",
+          "transitMinutes": 15,
+          "costEstimate": 4,
+          "notes": "地铁直达"
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "16:30",
+          "type": "sight",
+          "title": "人民公园",
+          "address": "小南街8号",
+          "poiId": "B001C7X8QA",
+          "transitMode": "步行",
+          "transitMinutes": 0,
+          "costEstimate": 30,
+          "notes": "体验成都慢生活，茶馆小憩"
+        },
+        {
+          "startTime": "16:30",
+          "endTime": "18:00",
+          "type": "transit",
+          "title": "人民公园→春熙路",
+          "address": "",
+          "poiId": "",
+          "transitMode": "地铁",
+          "transitMinutes": 10,
+          "costEstimate": 4,
+          "notes": "地铁2号线"
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "20:00",
+          "type": "meal",
+          "title": "晚餐：翠孃孃老火锅(鸳鸯锅)",
+          "address": "永兴巷15号附1号",
+          "poiId": "B0KRORQOAQ",
+          "transitMode": "步行",
+          "transitMinutes": 10,
+          "costEstimate": 300,
+          "notes": "鸳鸯锅满足不同辣度需求，一人辣一人不辣"
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "type": "other",
+          "title": "春熙路夜游",
+          "address": "",
+          "poiId": "",
+          "transitMode": "步行",
+          "transitMinutes": 0,
+          "costEstimate": 0,
+          "notes": "感受成都夜景"
+        }
+      ],
+      "dayCostEstimate": 588
+    },
+    {
+      "day": 3,
+      "summary": "武侯祠三国文化→锦里古街夜市",
+      "items": [
+        {
+          "startTime": "09:00",
+          "endTime": "12:00",
+          "type": "sight",
+          "title": "成都武侯祠博物馆",
+          "address": "武侯祠大街231号",
+          "poiId": "B001C07VJ2",
+          "transitMode": "地铁+公交",
+          "transitMinutes": 30,
+          "costEstimate": 100,
+          "notes": "三国文化圣地，门票50元/人（估算）"
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:30",
+          "type": "meal",
+          "title": "午餐：苍蝇馆子明婷饭店",
+          "address": "外曹家巷26号附15号",
+          "poiId": "B001C8O7L7",
+          "transitMode": "地铁",
+          "transitMinutes": 20,
+          "costEstimate": 144,
+          "notes": "地道苍蝇馆子，人均72元，可要求微辣"
+        },
+        {
+          "startTime": "13:30",
+          "endTime": "18:00",
+          "type": "sight",
+          "title": "锦里古街",
+          "address": "武侯祠大街231号附1号",
+          "poiId": "B0FFFD3P2C",
+          "transitMode": "步行",
+          "transitMinutes": 5,
+          "costEstimate": 0,
+          "notes": "免费逛，小吃自选"
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:30",
+          "type": "meal",
+          "title": "晚餐：锦里小吃",
+          "address": "武侯祠大街",
+          "poiId": "",
+          "transitMode": "",
+          "transitMinutes": 0,
+          "costEstimate": 150,
+          "notes": "品尝各种成都小吃"
+        },
+        {
+          "startTime": "19:30",
+          "endTime": "20:30",
+          "type": "transit",
+          "title": "锦里→春熙路",
+          "address": "",
+          "poiId": "",
+          "transitMode": "地铁",
+          "transitMinutes": 25,
+          "costEstimate": 6,
+          "notes": "地铁返回"
+        }
+      ],
+      "dayCostEstimate": 400
+    },
+    {
+      "day": 4,
+      "summary": "杜甫草堂诗圣遗风→返程",
+      "items": [
+        {
+          "startTime": "09:00",
+          "endTime": "12:00",
+          "type": "sight",
+          "title": "成都杜甫草堂博物馆",
+          "address": "青华路37号",
+          "poiId": "B001C06EMZ",
+          "transitMode": "地铁+公交",
+          "transitMinutes": 35,
+          "costEstimate": 100,
+          "notes": "诗圣故居，门票50元/人（估算）"
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:30",
+          "type": "meal",
+          "title": "午餐：川锦煌双流老妈兔头",
+          "address": "大慈寺路76号附11号",
+          "poiId": "B0H2H1IZRS",
+          "transitMode": "地铁+步行",
+          "transitMinutes": 30,
+          "costEstimate": 200,
+          "notes": "离酒店近，特色菜"
+        },
+        {
+          "startTime": "13:30",
+          "endTime": "15:00",
+          "type": "other",
+          "title": "退房+行李寄存",
+          "address": "",
+          "poiId": "",
+          "transitMode": "",
+          "transitMinutes": 0,
+          "costEstimate": 0,
+          "notes": "根据返程时间安排"
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "15:30",
+          "type": "transit",
+          "title": "春熙路→成都东站",
+          "address": "",
+          "poiId": "",
+          "transitMode": "地铁",
+          "transitMinutes": 30,
+          "costEstimate": 5,
+          "notes": "地铁7号线直达"
+        }
+      ],
+      "dayCostEstimate": 305
+    }
+  ],
+  "restaurantHighlights": [
+    {
+      "name": "翠孃孃老火锅(春熙路老店)",
+      "address": "永兴巷15号附1号",
+      "poiId": "B0KRORQOAQ",
+      "cuisine": "火锅",
+      "avgPricePerPerson": 102,
+      "recommendedDishes": [
+        "毛肚",
+        "鹅肠",
+        "鸭血",
+        "娃娃菜"
+      ],
+      "reason": "提供鸳鸯锅选择，一人辣锅一人清汤锅，完美解决'爱吃辣但同伴不能吃太辣'的矛盾；春熙路老店口碑好，营业至凌晨",
+      "source": "amap:maps_search_detail"
+    },
+    {
+      "name": "明婷饭店",
+      "address": "外曹家巷26号附15号",
+      "poiId": "B001C8O7L7",
+      "cuisine": "川菜小馆",
+      "avgPricePerPerson": 72,
+      "recommendedDishes": [
+        "回锅肉",
+        "麻婆豆腐",
+        "水煮鱼片",
+        "蒜泥白肉"
+      ],
+      "reason": "成都老字号苍蝇馆子，人均72元性价比高；可要求微辣口味，满足不能吃太辣的需求",
+      "source": "amap:maps_search_detail"
+    },
+    {
+      "name": "烤匠麻辣烤鱼(IFS店)",
+      "address": "红星路三段1号IFS国际金融中心7楼",
+      "poiId": "B0FFILAVWY",
+      "cuisine": "烤鱼",
+      "avgPricePerPerson": 120,
+      "recommendedDishes": [
+        "麻辣烤鱼",
+        "糖醋排骨",
+        "炝炒时蔬"
+      ],
+      "reason": "可定制辣度等级（微辣/中辣/特辣），适合口味不一的两人组合；IFS环境好，逛街后用餐方便",
+      "source": "amap:maps_around_search"
+    },
+    {
+      "name": "成都味道",
+      "address": "中纱帽街8号成都太古里",
+      "poiId": "B0LD09G4I6",
+      "cuisine": "川菜",
+      "avgPricePerPerson": 100,
+      "recommendedDishes": [
+        "宫保鸡丁",
+        "鱼香肉丝",
+        "口水鸡"
+      ],
+      "reason": "太古里核心位置，川菜正宗，可要求不辣/微辣菜品",
+      "source": "amap:maps_around_search"
+    },
+    {
+      "name": "蜀技双流老妈兔头",
+      "address": "红星路2段3号",
+      "poiId": "B0K0TR1PQE",
+      "cuisine": "川菜",
+      "avgPricePerPerson": 80,
+      "recommendedDishes": [
+        "双流老妈兔头",
+        "干锅花菜",
+        "火爆黄喉"
+      ],
+      "reason": "成都特色菜，离春熙路步行5分钟，兔头可做成不辣/微辣版本",
+      "source": "amap:maps_around_search"
+    },
+    {
+      "name": "锦里小吃一条街",
+      "address": "武侯祠大街231号附1号锦里内",
+      "poiId": "B001C8OXSS",
+      "cuisine": "小吃",
+      "avgPricePerPerson": 60,
+      "recommendedDishes": [
+        "三大炮",
+        "伤心凉粉",
+        "担担面",
+        "兔头"
+      ],
+      "reason": "集中品尝成都特色小吃，部分小吃可要求不辣",
+      "source": "amap:maps_text_search"
+    }
+  ],
+  "totalCostEstimate": 5376,
+  "budgetFeasible": true,
+  "budgetNotes": "预算拆解（两人总额）：\n- 往返交通：高铁1868元（G1378二等座，7小时）或飞机3012元（经济舱），推荐高铁节省预算\n- 住宿3晚：雅斯特酒店1449元/3晚（春熙路太古里店，不含早，性价比高）\n- 餐饮：8-10餐×150元人均×2人=2400-3000元（含一顿火锅、一顿苍蝇馆子）\n- 景点门票：约400-600元（熊猫基地、杜甫草堂等，部分免费）\n- 市内交通：约200-300元（地铁+公交）\n\n推荐方案总费用：5300-5800元（高铁）\n若选飞机：6400-6900元（超预算）\n\n建议：选高铁出行，留200-700元应急预算。",
+  "warnings": [
+    "出发城市假设为上海（用户未提供），实际请按真实出发地调整交通费用",
+    "交通、酒店价格为mock估算数据（带seasonFactor 1.6旺季加成），实际价格请以预订时为准",
+    "景点门票为估算值（熊猫基地55元/人、武侯祠50元/人、杜甫草堂50元/人），实际请以现场为准",
+    "天气10/1-10/4晴转多云有阵雨，23-37℃较热，建议携带防晒和雨具",
+    "市内交通时间为高德规划返回值，实际可能因路况变化",
+    "如实际出发地不是上海，交通费用会有较大差异，请相应调整"
+  ]
+}

@@ -9,9 +9,11 @@
 
 - [x] Claude Agent SDK（TypeScript）脚手架，模型走智谱 GLM 的 Anthropic 兼容端点
 - [x] 接入高德官方 MCP Server（Streamable HTTP）：POI 搜索 / 路线规划 / 天气
+- [x] 自写 travel MCP（进程内 SDK MCP）：交通检索 + 酒店报价（确定性 mock，来源标注）
 - [x] 单 Agent + 工具，结构化行程 JSON（schema 强校验）+ Markdown 渲染
 - [x] 成本小票：每次运行输出各模型 token 用量与耗时
-- [ ] W2：多 Agent 编排 + 自写 taste-profile MCP Server
+- [x] 真实运行样例与复盘：[docs/samples/](docs/samples/) · [W1 复盘（两次运行对比 + 已知问题清单）](docs/w1-notes.md)
+- [ ] W2：多 Agent 编排 + taste-profile MCP Server + 确定性 Verifier（验收标准见 W1 复盘）
 - [ ] W3：三层评测体系 + Langfuse tracing
 - [ ] W4：打磨与发布
 
