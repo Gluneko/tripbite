@@ -13,7 +13,10 @@
 - [x] 单 Agent + 工具，结构化行程 JSON（schema 强校验）+ Markdown 渲染
 - [x] 成本小票：每次运行输出各模型 token 用量与耗时
 - [x] 真实运行样例与复盘：[docs/samples/](docs/samples/) · [W1 复盘（两次运行对比 + 已知问题清单）](docs/w1-notes.md)
-- [ ] W2：多 Agent 编排 + taste-profile MCP Server + 确定性 Verifier（验收标准见 W1 复盘）
+- [x] W2：确定性 Verifier（6 类规则 26 单测）+ 打回定向重排循环（实测 R0=7错→R2=0）
+- [x] W2：taste-profile MCP——大众点评 30 条真实评价 → 口味画像 + 候选匹配打分（推荐理由带证据引用）
+- [x] 供应商无关 LLM 后端（智谱/DeepSeek/Kimi 任一 Anthropic 兼容端点，.env 三行切换）+ 跨模型首测（见 [W2 笔记](docs/w2-notes.md)）
+- [ ] W2：多 Agent 拆分（Transport/Stay/Food/Route）+ 单/多 Agent 消融对比
 - [ ] W3：三层评测体系 + Langfuse tracing
 - [ ] W4：打磨与发布
 

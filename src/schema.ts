@@ -25,6 +25,10 @@ export const ItineraryItemSchema = z.object({
   type: z.enum(["sight", "meal", "transit", "hotel", "other"]),
   title: z.string().describe("活动名称，如 宽窄巷子 / 午餐：xx火锅"),
   address: z.string().optional(),
+  location: z
+    .string()
+    .optional()
+    .describe('坐标 "经度,纬度"，直接透传高德工具返回的 location 字段（校验器依赖）'),
   poiId: z.string().optional().describe("高德 POI ID（如适用）"),
   transitMode: z
     .string()
@@ -61,6 +65,18 @@ export const ItinerarySchema = z.object({
         mode: z.string().describe("往返大交通方式，如 高铁/飞机"),
         description: z.string(),
         costEstimate: z.number().describe("往返总花费估计（元，按人数）"),
+        recommended: z
+          .boolean()
+          .optional()
+          .describe("是否为推荐方案（行程排程必须与推荐方案的到/发时间自洽）"),
+        arriveTime: z
+          .string()
+          .optional()
+          .describe("去程到达目的地时刻 HH:mm（来自交通工具查询结果）"),
+        returnDepTime: z
+          .string()
+          .optional()
+          .describe("返程出发时刻 HH:mm（如已确定）"),
         source: z.string().describe("数据来源；W1 允许估算，标注 estimate"),
       })
     )

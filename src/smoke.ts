@@ -9,7 +9,7 @@ async function checkGlm() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": config.zhipuApiKey,
+      "x-api-key": config.llmApiKey,
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({

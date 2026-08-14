@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node --env-file=.env --import tsx src/index.ts",
     "smoke": "node --env-file=.env --import tsx src/smoke.ts",
+    "verify": "node --import tsx src/verify-cli.ts",
+    "test": "node --import tsx --test src/verify/checks.test.ts src/taste/profile.test.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit"
   },
