@@ -3,7 +3,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { config } from "./config.js";
 import { travelServer } from "./mcp/travel.js";
 import { tasteServer } from "./mcp/taste.js";
-import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.js";
+import { AGENTS } from "./agents.js";
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_MULTI, buildUserPrompt } from "./prompt.js";
 import { ItinerarySchema, itineraryJsonSchema, type Itinerary } from "./schema.js";
 import { renderMarkdown } from "./render.js";
 import {
@@ -14,16 +15,21 @@ import {
 
 const argv = process.argv.slice(2);
 while (argv[0] === "--") argv.shift(); // pnpm 会把分隔符 "--" 原样传入
-const rawQuery = argv.join(" ").trim();
+/** 多 Agent 编排模式：pnpm dev -- --multi "查询"（或 TRIPBITE_MODE=multi） */
+const multiMode =
+  argv.includes("--multi") || process.env.TRIPBITE_MODE === "multi";
+const rawQuery = argv.filter((a) => a !== "--multi").join(" ").trim();
 if (!rawQuery) {
-  console.error('用法：pnpm dev -- "十一去成都4天，两人预算6000，爱吃辣…"');
+  console.error('用法：pnpm dev -- [--multi] "十一去成都4天，两人预算6000，爱吃辣…"');
   process.exit(1);
 }
 
 /** Verifier 打回后的最大重排轮数（0 = 只生成不重排） */
 const MAX_REPAIR_ROUNDS = Number(process.env.TRIPBITE_MAX_REPAIR ?? 2);
 
-console.log(`🧭 食途 TripBite | 模型: ${config.model} | 高德 MCP: 已配置`);
+console.log(
+  `🧭 食途 TripBite | 模型: ${config.model} | 模式: ${multiMode ? "多Agent编排" : "单Agent"} | 高德 MCP: 已配置`
+);
 console.log(`📝 需求: ${rawQuery}\n`);
 
 interface RunOutcome {
@@ -46,7 +52,8 @@ async function runAgentOnce(
     prompt,
     options: {
       model: config.model,
-      systemPrompt: SYSTEM_PROMPT,
+      systemPrompt: multiMode ? SYSTEM_PROMPT_MULTI : SYSTEM_PROMPT,
+      agents: multiMode ? AGENTS : undefined,
       resume: resumeSessionId,
       mcpServers: {
         amap: {
@@ -57,18 +64,18 @@ async function runAgentOnce(
           travel: travelServer, // 进程内 SDK MCP：交通/酒店报价（W1 mock，W2 换真实源）
         "taste-profile": tasteServer, // 口味画像：大众点评真实数据建模（W2 核心差异点）
       },
-      // 单 Agent 阶段：只需要 MCP 工具，禁掉文件/命令类内置工具，保持轨迹干净
+      // 禁掉文件/命令类内置工具保持轨迹干净；单 Agent 模式额外禁 Task（无子 Agent 可派）
       disallowedTools: [
         "Bash",
         "Edit",
         "Write",
         "NotebookEdit",
-        "Task",
         "WebFetch",
         "WebSearch",
+        ...(multiMode ? [] : ["Task"]),
       ],
       permissionMode: "bypassPermissions",
-      maxTurns: 60,
+      maxTurns: multiMode ? 90 : 60,
       outputFormat: {
         type: "json_schema",
         schema: itineraryJsonSchema as Record<string, unknown>,

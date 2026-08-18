@@ -1,6 +1,11 @@
 import { strict as assert } from "node:assert";
 import { test } from "node:test";
-import { buildProfile, loadReviews, matchCandidates } from "./profile.js";
+import {
+  buildProfile,
+  loadReviews,
+  matchCandidates,
+  pickExploration,
+} from "./profile.js";
 
 const profile = buildProfile(loadReviews());
 
@@ -56,6 +61,24 @@ test("match: 低于 4.0 的高德评分触发质量底线扣分", () => {
     { name: "评分堪忧餐厅", cuisine: "川菜", rating: 3.6 },
   ]);
   assert.ok(r!.reasons.some((x) => x.includes("质量底线")));
+});
+
+test("match: 单样本菜系结论带低置信标注且降权", () => {
+  const [r] = matchCandidates(profile, [
+    { name: "某韩式烤肉店", cuisine: "韩式烤肉", rating: 4.6 },
+  ]);
+  assert.ok(r!.reasons.some((x) => x.includes("低置信")));
+});
+
+test("exploration: 画像外高分菜系被选为探索位，画像内菜系不入选", () => {
+  const pick = pickExploration(profile, [
+    { name: "顺德鱼生粥城", cuisine: "粤菜", rating: 4.7 },
+    { name: "某火锅", cuisine: "火锅", rating: 4.9 },
+    { name: "低分西北菜", cuisine: "西北菜", rating: 4.2 },
+  ]);
+  assert.ok(pick);
+  assert.equal(pick!.name, "顺德鱼生粥城");
+  assert.ok(pick!.reason.includes("探索位"));
 });
 
 test("match: 打分确定性——同输入两次结果一致", () => {

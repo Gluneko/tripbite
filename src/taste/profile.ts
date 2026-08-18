@@ -184,19 +184,25 @@ export function matchCandidates(
     const reasons: string[] = [];
     const text = `${c.name} ${c.cuisine ?? ""} ${c.description ?? ""}`;
 
-    // 菜系亲和度
+    // 菜系亲和度（样本 <2 的结论降权并标注低置信——防止单次体验被过度泛化）
     if (c.cuisine) {
       const hit = Object.entries(profile.cuisineAffinity).find(
         ([k]) => c.cuisine!.includes(k) || k.includes(c.cuisine!)
       );
       if (hit) {
         const [k, v] = hit;
+        const lowConf = v.count < 2;
+        const confNote = lowConf ? "——仅 1 次就餐样本，低置信结论" : "";
         if (v.avgRating >= 4.5) {
-          score += 12;
-          reasons.push(`「${k}」是画像高分菜系（${v.count} 次就餐均分 ${v.avgRating}）`);
+          score += lowConf ? 6 : 12;
+          reasons.push(
+            `「${k}」是画像高分菜系（${v.count} 次就餐均分 ${v.avgRating}）${confNote}`
+          );
         } else if (v.avgRating <= 3.5) {
-          score -= 10;
-          reasons.push(`「${k}」在画像中评分偏低（均分 ${v.avgRating}），谨慎推荐`);
+          score -= lowConf ? 5 : 10;
+          reasons.push(
+            `「${k}」在画像中评分偏低（均分 ${v.avgRating}）${confNote}，谨慎推荐`
+          );
         }
       }
     }
@@ -237,4 +243,27 @@ export function matchCandidates(
     if (reasons.length === 0) reasons.push("画像无强信号命中，按公共评分与常规质量判断");
     return { name: c.name, score, verdict, reasons };
   });
+}
+
+/**
+ * 探索位：从候选中挑一家「画像样本外的菜系 + 公共评分 ≥4.5」的店。
+ * 目的：防止画像形成口味茧房（画像只知道用户吃过什么，不知道没吃过的是否喜欢），
+ * 同时探索位的真实反馈是画像未来的数据增量入口。
+ */
+export function pickExploration(
+  profile: TasteProfile,
+  candidates: Candidate[]
+): { name: string; reason: string } | null {
+  const unknown = candidates.filter((c) => {
+    if (!c.cuisine || (c.rating ?? 0) < 4.5) return false;
+    return !Object.keys(profile.cuisineAffinity).some(
+      (k) => c.cuisine!.includes(k) || k.includes(c.cuisine!)
+    );
+  });
+  if (unknown.length === 0) return null;
+  const best = [...unknown].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]!;
+  return {
+    name: best.name,
+    reason: `「${best.cuisine}」不在画像的 ${profile.sampleSize} 条样本内，但公共评分 ${best.rating} 过硬——作为画像外探索位推荐：防口味茧房，吃过之后也为画像补充新菜系数据`,
+  };
 }

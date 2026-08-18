@@ -8,7 +8,12 @@
  */
 import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
-import { buildProfile, loadReviews, matchCandidates } from "../taste/profile.js";
+import {
+  buildProfile,
+  loadReviews,
+  matchCandidates,
+  pickExploration,
+} from "../taste/profile.js";
 
 const profile = buildProfile(loadReviews());
 
@@ -49,8 +54,19 @@ export const tasteServer = createSdkMcpServer({
         const results = matchCandidates(profile, candidates).sort(
           (a, b) => b.score - a.score
         );
+        const exploration = pickExploration(profile, candidates);
         return {
-          content: [{ type: "text", text: JSON.stringify({ results }) }],
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify({
+                results,
+                exploration:
+                  exploration ??
+                  "无探索位候选（所有候选菜系画像里都吃过，或画像外候选公共评分不足 4.5）",
+              }),
+            },
+          ],
         };
       }
     ),

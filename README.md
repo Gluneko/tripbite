@@ -16,7 +16,8 @@
 - [x] W2：确定性 Verifier（6 类规则 26 单测）+ 打回定向重排循环（实测 R0=7错→R2=0）
 - [x] W2：taste-profile MCP——大众点评 30 条真实评价 → 口味画像 + 候选匹配打分（推荐理由带证据引用）
 - [x] 供应商无关 LLM 后端（智谱/DeepSeek/Kimi 任一 Anthropic 兼容端点，.env 三行切换）+ 跨模型首测（见 [W2 笔记](docs/w2-notes.md)）
-- [ ] W2：多 Agent 拆分（Transport/Stay/Food/Route）+ 单/多 Agent 消融对比
+- [x] W2：多 Agent 拆分（`--multi`，Orchestrator + 4 领域子 Agent）+ 单/多消融对比（[结论](docs/w2-notes.md)：当前任务规模下单 Agent 更优，数据说话）
+- [x] W2：画像低置信标注 + 画像外探索位（防口味茧房）
 - [ ] W3：三层评测体系 + Langfuse tracing
 - [ ] W4：打磨与发布
 
