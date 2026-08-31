@@ -1,6 +1,13 @@
 # 食途 TripBite 🍜🧭
 
 > 旅行美食规划 Agent — Claude Agent SDK + MCP · 带评测与可观测的开源作品集项目
+>
+> 姊妹项目（一套方法论，六种确定性形态）：本项目（规则约束）·
+> [岩鉴 PetroLens](https://github.com/Gluneko/petrolens)（数值复算）·
+> [腕鉴 BrachioKey](https://github.com/Gluneko/brachiokey)（决策树复走）·
+> [鸟探 BirdScout](https://github.com/Gluneko/birdscout)（数据血缘）·
+> [矿探 OreScout](https://github.com/Gluneko/orescout)（统计推断确定性化）·
+> [文鉴 CiteLens](https://github.com/Gluneko/citelens)（归因确定性化）
 
 **输入**：目的地、日期、预算、口味偏好、同行人数
 **输出**：可执行的行程方案 —— 交通/酒店候选、逐日路线（含通勤时间）、每餐餐厅推荐（带口味匹配依据）

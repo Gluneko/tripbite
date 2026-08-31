@@ -1,6 +1,8 @@
 node_modules/
 dist/
 output/
+docs-private/
 .env
 *.log
 .DS_Store
+_to_delete/
